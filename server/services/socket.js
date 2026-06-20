@@ -8,8 +8,6 @@ const server = http.createServer(app);
 
 const allowedOrigins = [
     process.env.CLIENT_URL,
-    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
-    process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : null,
     'http://localhost:5173',
     'http://localhost:3000',
 ].filter(Boolean);

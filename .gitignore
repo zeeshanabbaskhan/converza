@@ -10,7 +10,6 @@ client/.env
 dist/
 build/
 client/dist/
-public/
 
 # Logs
 *.log

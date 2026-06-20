@@ -68,11 +68,8 @@ const corsOptions = {
       'http://localhost:5173',
       'http://localhost:3000',
       'https://chat-videocall.app.viralix.dev',
-      'http://chat-videocall.app.viralix.dev',
-      process.env.CLIENT_URL,
-      process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null,
-      process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : null,
-    ].filter(Boolean);
+      'http://chat-videocall.app.viralix.dev'
+    ];
 
     if (allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
@@ -159,10 +156,7 @@ app.get('*', (req, res, next) => {
   res.sendFile(path.join(__dirname, 'client/dist/index.html'));
 });
 
-const isVercel = process.env.VERCEL === '1';
+server.listen(port, () => console.log(`Server listening on port ${port}`))
 
-if (!isVercel) {
-  server.listen(port, () => console.log(`Server listening on port ${port}`));
-}
-
-export default app;
+// Attach PeerJS server after server.listen
+// app.use('/myapp', peerServer);

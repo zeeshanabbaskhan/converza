@@ -7,7 +7,8 @@ const fallbackApiBaseUrl = import.meta.env.MODE === 'development'
 
 const axiosInstance = axios.create({
   baseURL: apiBaseUrlFromEnv || fallbackApiBaseUrl,
-  withCredentials: true, // send cookies (optional)
+  withCredentials: true,
+  timeout: 15000,
 });
 
 export default axiosInstance

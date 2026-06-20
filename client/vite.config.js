@@ -7,7 +7,8 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: false, // Disable for production
+    sourcemap: false,
+    target: 'es2015',
     rollupOptions: {
       output: {
         manualChunks: undefined,

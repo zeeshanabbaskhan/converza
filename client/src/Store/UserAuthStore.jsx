@@ -1086,7 +1086,16 @@ export const userauthstore = create((set, get) => ({
         }
 
         set({ isPeerInitializing: true, isPeerUnavailable: false });
-        const peer = createPeer(id); // from your PeerService.js
+
+        let peer;
+        try {
+            peer = createPeer(id);
+        } catch (err) {
+            console.error('[UserAuthStore] Failed to initialize PeerJS:', err);
+            set({ isPeerInitializing: false, isPeerUnavailable: true, peer: null, peerId: null });
+            return;
+        }
+
         set({ peer, peerId: id });
 
         if (typeof peer.removeAllListeners === 'function') {

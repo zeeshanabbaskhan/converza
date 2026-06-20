@@ -14,7 +14,11 @@ const ProtectedRoute = ({ children }) => {
     }, [hasCheckedAuth, checkauth]);
 
     if (ischeckingauth || !hasCheckedAuth) {
-        return <Loader />;
+        return (
+            <div className="signupbody">
+                <Loader />
+            </div>
+        );
     }
 
 

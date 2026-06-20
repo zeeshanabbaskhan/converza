@@ -3,16 +3,14 @@
 html,
 body,
 #root {
-
-
     height: 100vh;
+    height: 100dvh;
     width: 100vw;
     font-family: 'Poppins', sans-serif;
-    /* border: #484d48 3px solid; */
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
+    background: linear-gradient(135deg, #4e9a65, #484d48);
 }
 
 .signupbody {

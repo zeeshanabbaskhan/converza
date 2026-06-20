@@ -17,11 +17,12 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 10000;
 }
 
 .incoming-call-content {
@@ -101,6 +102,11 @@
 
 .answer-button:hover {
   background: #45a049;
+}
+
+.answer-button:disabled {
+  background: #9ca3af;
+  cursor: not-allowed;
 }
 
 .reject-button {

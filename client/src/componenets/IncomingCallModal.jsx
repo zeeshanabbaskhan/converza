@@ -6,24 +6,32 @@ import Loader from './Loader';
 
 const IncomingCallModal = () => {
   const navigate = useNavigate();
-  const incomingCall = userauthstore(state => state.incomingCall);
-  const answerCall = userauthstore(state => state.answerCall);
-  const rejectCall = userauthstore(state => state.rejectCall);
-  const callStatus = userauthstore(state => state.callStatus);
-  // const localStream = userauthstore(state => state.localStream);
+  const incomingCall = userauthstore((state) => state.incomingCall);
+  const answerCall = userauthstore((state) => state.answerCall);
+  const rejectCall = userauthstore((state) => state.rejectCall);
+  const callStatus = userauthstore((state) => state.callStatus);
 
-  // console.log('answerCall:', answerCall, typeof answerCall);
-  // console.log('rejectCall:', rejectCall, typeof rejectCall);
+  if (!incomingCall) {
+    return null;
+  }
 
-  if (!incomingCall || !incomingCall.signal) return null;
+  const callerId = incomingCall.callerId || incomingCall.from;
+  const canAnswer = Boolean(incomingCall.signal);
 
   const handleAnswer = () => {
-    // Pass the PeerJS call object and caller's peerId
-    answerCall(incomingCall.signal, incomingCall.from, navigate);
+    if (!canAnswer) {
+      return;
+    }
+
+    answerCall(incomingCall.signal, callerId, navigate);
   };
 
   const handleReject = () => {
-    rejectCall(incomingCall.from);
+    if (!callerId) {
+      return;
+    }
+
+    rejectCall(callerId);
   };
 
   return (
@@ -39,14 +47,28 @@ const IncomingCallModal = () => {
           alt="profile"
           className="caller-avatar"
         />
-        <h2 className="call-title">{incomingCall.name} is calling...</h2>
-        <p className="call-subtitle">📞 Incoming video call</p>
+        <h2 className="call-title">{incomingCall.name || 'Someone'} is calling...</h2>
+        <p className="call-subtitle">
+          {canAnswer ? 'Incoming video call' : 'Connecting call...'}
+        </p>
         <div className="call-buttons">
-          <button onClick={handleAnswer} className="answer-button" disabled={callStatus === 'connected'}>
-            {callStatus === 'connected' ? <Loader className="small" /> : 'Answer'}
+          <button
+            onClick={handleAnswer}
+            className="answer-button"
+            disabled={!canAnswer || callStatus === 'connected'}
+          >
+            {!canAnswer
+              ? 'Connecting...'
+              : callStatus === 'connected'
+                ? <Loader className="small" />
+                : 'Answer'}
           </button>
-          <button onClick={handleReject} className="reject-button" disabled={callStatus === 'connected'}>
-            {callStatus === 'connected' ? <Loader className="small" /> : 'Reject'}
+          <button
+            onClick={handleReject}
+            className="reject-button"
+            disabled={callStatus === 'connected'}
+          >
+            Reject
           </button>
         </div>
       </div>

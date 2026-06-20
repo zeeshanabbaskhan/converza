@@ -6,7 +6,6 @@ import Leftsidebar from '../componenets/Leftsidebar';
 import Welcomechat from '../componenets/Welcomechat';
 import { userauthstore } from '../Store/UserAuthStore';
 import Mainchat from '../componenets/Mainchat';
-import IncomingCallModal from '../componenets/IncomingCallModal';
 import axiosInstance from '../Store/AxiosInstance';
 
 
@@ -40,8 +39,6 @@ const Home = () => {
     return (
         <div className='signupbody'>
             {/* <button onClick={handleGetIceServers}>Get ICE Servers</button> */}
-            <IncomingCallModal />
-
             <div className="homesec">
                 {/* Show Left Sidebar only if screen is large or no user selected */}
                 <div className={`leftside ${selecteduser ? 'hide-on-mobile' : ''}`}>

@@ -1,11 +1,9 @@
 import React, { useEffect } from 'react';
 import AppRoutes from './Routes/AppRoutes.jsx';
-// import { BrowserRouter as Router } from 'react-router-dom'
-// import { useNavigate } from 'react-router-dom';
-import './App.css'
-// import { useState,useEffect } from "react"
+import './App.css';
 import { Toaster } from 'react-hot-toast';
 import { userauthstore } from './Store/UserAuthStore';
+import IncomingCallModal from './componenets/IncomingCallModal';
 
 
 function App() {
@@ -40,8 +38,8 @@ function App() {
   // }, []);
   return (
     <>
-
       <AppRoutes />
+      <IncomingCallModal />
       <Toaster
         position="top-center"
         toastOptions={{

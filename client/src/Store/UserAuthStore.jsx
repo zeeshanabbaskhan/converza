@@ -310,7 +310,11 @@ export const userauthstore = create((set, get) => ({
                 callStatus: 'connected',
                 call: {
                     type: 'in-call',
-                    user: { _id: fromPeerId, name: callObj.metadata?.name || 'Unknown', profileImg: callObj.metadata?.profileImg || '/avatar.jpg' },
+                    user: {
+                        _id: fromPeerId,
+                        name: callObj.metadata?.name || get().incomingCall?.name || 'Unknown',
+                        profileImg: callObj.metadata?.profileImg || get().incomingCall?.profileImg || '/avatar.jpg',
+                    },
                     peerId: fromPeerId,
                     started: Date.now()
                 },
@@ -419,17 +423,24 @@ export const userauthstore = create((set, get) => ({
 
         socket.on('incoming-call', (data) => {
             console.log('[UserAuthStore] Socket incoming-call event:', data);
+            const { user, incomingCall: currentIncomingCall } = get();
+
             set({
-                incomingCall: data,
-                callStatus: 'ringing'
+                incomingCall: {
+                    callerId: data.from,
+                    from: data.from,
+                    name: data.name || currentIncomingCall?.name || 'Unknown',
+                    profileImg: data.profileImg || currentIncomingCall?.profileImg || '/avatar.jpg',
+                    signal: currentIncomingCall?.signal || data.signal || null,
+                },
+                callStatus: 'ringing',
             });
 
             get().playRingtone();
 
-            // Store the signal for WebRTCService to process
-            // set((state) => ({
-            //     pendingSignals: [...(state.pendingSignals || []), { type: 'incoming-call', data }]
-            // }));
+            if (user?._id) {
+                get().initPeer(user._id);
+            }
         });
 
         socket.on('call-answered', (data) => {
@@ -680,6 +691,11 @@ export const userauthstore = create((set, get) => ({
             });
             get().setupCallListeners();
             get().setupMessageListeners();
+
+            const { user } = get();
+            if (user?._id) {
+                get().initPeer(user._id);
+            }
         });
 
         socket.on('disconnect', (reason) => {
@@ -1183,19 +1199,24 @@ export const userauthstore = create((set, get) => ({
 
         peer.on('call', (callObj) => {
             console.log('[UserAuthStore] PeerJS incoming call event:', callObj);
-            const { call } = get();
+            const { call, incomingCall: currentIncomingCall } = get();
 
             if (call) {
                 callObj.close();
                 return;
             }
 
+            const callerId = currentIncomingCall?.callerId
+                || currentIncomingCall?.from
+                || callObj.peer;
+
             set({
                 incomingCall: {
-                    signal: callObj,
+                    callerId,
                     from: callObj.peer,
-                    name: callObj.metadata?.name || 'Unknown',
-                    profileImg: callObj.metadata?.profileImg || '/avatar.jpg',
+                    name: callObj.metadata?.name || currentIncomingCall?.name || 'Unknown',
+                    profileImg: callObj.metadata?.profileImg || currentIncomingCall?.profileImg || '/avatar.jpg',
+                    signal: callObj,
                 },
                 callStatus: 'ringing',
             });

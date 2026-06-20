@@ -1,0 +1,23 @@
+{
+  "name": "fullstack-chat-app",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
+  },
+  "scripts": {
+    "build": "cd client && npm ci && npm run build",
+    "vercel-build": "cd client && npm run build && node scripts/prepare-vercel.mjs",
+    "heroku-postbuild": "cd client && npm ci && npm run build && cd ../server && npm ci",
+    "start": "cd server && npm start",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\""
+  },
+  "dependencies": {
+    "peer": "^1.0.2",
+    "peerjs": "^1.5.5"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  }
+}

@@ -1,0 +1,236 @@
+    .profilcard {
+        max-width: 100%;
+
+        display: flex;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+        font-family: "Poppins", sans-serif;
+
+
+    }
+
+    .profiledata {
+        display: flex;
+        gap: 12px;
+        margin-left: 13px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .profilimg img {
+        border-radius: 50%;
+        width: 53px;
+        height: 53px;
+        object-fit: cover;
+    }
+
+    .profilenames {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .profilename {
+        font-size: 20px;
+        font-weight: 600;
+        text-shadow: 0px 0px 20px black;
+
+    }
+
+    .profileusername {
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .menu {
+
+        position: relative;
+        margin-right: 33px;
+    }
+
+    .groupmenuactions {
+        display: flex;
+        gap: 8px;
+        margin-right: 16px;
+    }
+
+    .groupmenuactions button {
+        border: none;
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .groupmanagebtn {
+        background: rgba(102, 87, 64, 0.65);
+        color: #fff;
+    }
+
+    .leavegroupbtn {
+        background: rgba(150, 58, 58, 0.85);
+        color: #fff;
+    }
+
+    .groupmanagepanel {
+        margin: 8px 12px 0;
+        padding: 10px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(0, 0, 0, 0.16);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-height: 300px;
+        overflow: auto;
+    }
+
+    .groupsection {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .groupsectiontitle {
+        font-size: 13px;
+        font-weight: 700;
+        opacity: 0.9;
+    }
+
+    .groupinlineform {
+        display: flex;
+        gap: 8px;
+    }
+
+    .groupinlineform input {
+        flex: 1;
+        border-radius: 8px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(255, 255, 255, 0.06);
+        color: #fff;
+        padding: 6px 8px;
+    }
+
+    .groupinlineform button,
+    .groupsection > button,
+    .groupmemberactions button {
+        border: none;
+        border-radius: 8px;
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        background: #717b65;
+        color: #111;
+    }
+
+    .groupinlineform button:disabled,
+    .groupsection > button:disabled,
+    .groupmemberactions button:disabled,
+    .leavegroupbtn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .groupmemberspicklist,
+    .groupmemberslistview {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .grouppickitem {
+        display: flex;
+        gap: 8px;
+        align-items: center;
+    }
+
+    .groupmemberrow {
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        align-items: center;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 6px 8px;
+    }
+
+    .groupmembermeta {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .groupmembername {
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+    .groupmemberbadges {
+        font-size: 11px;
+        opacity: 0.8;
+    }
+
+    .groupmemberactions {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .groupmemberactions .dangerbtn {
+        background: rgba(150, 58, 58, 0.9);
+        color: #fff;
+    }
+
+    .groupemptynote {
+        font-size: 12px;
+        opacity: 0.8;
+    }
+
+    .menubtns {
+        position: absolute;
+        background-color: rgb(215, 227, 220);
+        width: 140px;
+        /* border: 1px solid; */
+        top: 30px;
+        right: 10px;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 0;
+
+        box-shadow: 4px 4px 13px rgb(111, 109, 109);
+        display: none;
+
+
+    }
+
+    .menubtns div {
+        font-weight: 500;
+        text-align: center;
+        width: 100%;
+        height: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+
+    .menubtns div button {
+        background-color: transparent;
+        border: none;
+        color: black;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    .menubtns div:hover {
+        background-color: rgba(96, 186, 112, 0.673);
+    }
+
+    @media (max-width: 1280px) {
+        .profilename {
+            font-size: 16px;
+        }
+    }
